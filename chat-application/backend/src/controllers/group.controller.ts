@@ -68,7 +68,8 @@ export const createGroup = async (req: AuthRequest, res: Response) => {
 
     const group = await Group.create({
       groupName: groupName.trim(),
-      groupImage: imageUrl || null,
+      // groupImage: imageUrl || null,
+      groupImage: groupImage || undefined,
       members: allMembers,
       admins: [userId],
       createdBy: userId,
