@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ─── ChatSphere Premium Chat Area Background ─────────────────────────────── */
+
+/*
+  Subtle SVG chat-bubble watermark pattern encoded as a data URI.
+  The pattern is extremely faint so it never competes with messages.
+*/
+.chat-messages-bg {
+  position: relative;
+
+  /* Light mode: soft warm-white/cream gradient */
+  background-color: #fffaf6;
+  background-image:
+    /* Warm cream gradient base */
+    radial-gradient(
+      ellipse 70% 60% at 80% 10%,
+      rgba(251, 146, 60, 0.07) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 15% 85%,
+      rgba(251, 146, 60, 0.05) 0%,
+      transparent 65%
+    ),
+    linear-gradient(
+      160deg,
+      #fffdf9 0%,
+      #fff8f1 40%,
+      #fef3e8 75%,
+      #fffaf6 100%
+    ),
+    /* Minimal speech-bubble watermark — extremely subtle */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='none'/%3E%3Crect x='8' y='12' width='36' height='24' rx='8' fill='none' stroke='%23f97316' stroke-width='1.4' stroke-opacity='0.07'/%3E%3Cpolygon points='14,36 10,44 22,36' fill='%23f97316' fill-opacity='0.05'/%3E%3Crect x='38' y='40' width='34' height='22' rx='7' fill='none' stroke='%23f97316' stroke-width='1.4' stroke-opacity='0.06'/%3E%3Cpolygon points='66,62 70,70 58,62' fill='%23f97316' fill-opacity='0.04'/%3E%3C/svg%3E");
+  background-size: auto, auto, 100% 100%, 80px 80px;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  transition: background 0.3s ease;
+}
+
+/* Dark mode: deep dark with very subtle orange + purple glow */
+:where(.dark) .chat-messages-bg {
+  background-color: #09090b;
+  background-image:
+    /* Orange glow — top-right corner */
+    radial-gradient(
+      ellipse 55% 45% at 85% 5%,
+      rgba(251, 146, 60, 0.08) 0%,
+      transparent 65%
+    ),
+    /* Purple glow — bottom-left corner */
+    radial-gradient(
+      ellipse 50% 40% at 10% 90%,
+      rgba(168, 85, 247, 0.07) 0%,
+      transparent 60%
+    ),
+    /* Dark gradient base */
+    linear-gradient(
+      160deg,
+      #0d0d11 0%,
+      #09090b 35%,
+      #0b0a0f 70%,
+      #09090b 100%
+    ),
+    /* Same speech-bubble watermark, lighter tint for dark bg */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='none'/%3E%3Crect x='8' y='12' width='36' height='24' rx='8' fill='none' stroke='%23f97316' stroke-width='1.4' stroke-opacity='0.05'/%3E%3Cpolygon points='14,36 10,44 22,36' fill='%23f97316' fill-opacity='0.04'/%3E%3Crect x='38' y='40' width='34' height='22' rx='7' fill='none' stroke='%23c084fc' stroke-width='1.4' stroke-opacity='0.04'/%3E%3Cpolygon points='66,62 70,70 58,62' fill='%23c084fc' fill-opacity='0.03'/%3E%3C/svg%3E");
+  background-size: auto, auto, 100% 100%, 80px 80px;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+}
