@@ -112,15 +112,19 @@ export const login = async (req: Request, res: Response) => {
 
     const token = generateToken(user._id.toString());
 
-    res.cookie("token", token, {
-      httpOnly: true,
+    res.cookie(
+  "token",
+  token,
+  {
+    httpOnly: true,
 
-      secure: false,
+    secure: true,
 
-      sameSite: "lax",
+    sameSite: "none",
 
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  }
+);
 
     return res.status(200).json({
       success: true,
@@ -151,7 +155,14 @@ export const login = async (req: Request, res: Response) => {
 */
 
 export const logout = (_req: Request, res: Response) => {
-  res.clearCookie("token");
+  res.clearCookie(
+  "token",
+  {
+    httpOnly:true,
+    secure:true,
+    sameSite:"none"
+  }
+);
 
   return res.status(200).json({
     success: true,
